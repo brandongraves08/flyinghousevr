@@ -1,0 +1,10 @@
+{
+    "settings": {
+        "VR Device": [
+            "Oculus"
+        ],
+        "Command Line Arguments": {
+            "For Android": [],
+            "For Desktop": [],
+            "For iOS": [],
+            "For tvOS": [],

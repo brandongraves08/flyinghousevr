@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!129 &1
+PlayerSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 26
+  productGUID: 5a5858a8-1e83-4c5e-9e48-9f5c7e2b1a84
+  AndroidBundleVersionCode: 1
+  AndroidMinSdkVersion: 29
+  AndroidTargetSdkVersion: 0
+  AndroidBuildApkPerCpuArchitecture: 0
+  AndroidInstallLocation: 0
+  AndroidSplashScreenScale: 0
+  AndroidTargetArchitectures: 11
+  AndroidSupportedAspectRatio: 1
+  AndroidLogcatSettings:
+    m_PendingCapturePath: 
+    m_PendingSavePath: 
+    m_Filter: 
+    m_FilterIsRegex: 0
+    m_FilterMatchedNewLines: 0
+    m_MemoryReference: 0
+    m_AutoSelect: 1
+    m_PackagePid: 
+    m_SelectedDevice: 
+    m_SelectedProcess: 
+    m_SelectedCommand: 
+    m_SelectedPackage: 
+  deviceType: 4
+  actionOnDotNetUnhandledException: 1
+  enableInternalProfiler: 0
+  logObjCUncaughtExceptions: 1
+  enableCrashReporterAPI: 0
+  cameraUsageDescription: Flying House VR uses passthrough to display your room
+  locationUsageDescription: 
+  microphoneUsageDescription: 
+  bluetoothUsageDescription: 
+  switchNetLibKey: 
+  switchSocketConfigEnabled: 0
+  switchSocketInitialBufferSize: 
+  switchSocketBufferSize: 
+  switchSocketMaxConnections: 
+  switchBackgroundBehavior: 0
+  switchScreenResolutionMode: 0
+  useNewSampleRate: 0
+  useLegacyInputManager: 0
+  useXRInput: 1
+  useXRManagement: 1
+  xrSettings:
+    m_LoaderManagerInstance:
+      m_ObjectHideFlags: 0
+      m_Asset: {fileID: 0}
+    m_AutoInitialization: 1
+    m_AutoInitializationDelayTime: 0
+    m_AutoInitializationDelayFrame: 0
+  companyName: FlyingHouseVR
+  productName: Flying House VR
+  defaultCursor: {fileID: 0}
+  cursorHotspot: {x: 0, y: 0}
+  m_SplashScreenLogo: {fileID: 0}
+  m_SplashScreenStyle: 0
+  m_SplashScreenBackgroundMode: 2
+  m_SplashScreenBackground: {r: 0, g: 0, b: 0, a: 1}
+  m_SplashScreenLogoStyle: 0
+  m_SplashScreenAnimation: 1
+  m_SplashScreenAnimationTime: 2
+  m_SplashScreenDrawLogoRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  m_SplashScreenLogoDownscale: 0
+  m_VirtualRealitySupported: 1
+  m_VirtualRealitySDKs:
+  - Oculus

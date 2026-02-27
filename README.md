@@ -1,71 +1,123 @@
-# Flying House VR
+# Flying House VR 🏠✈️
 
-A VR experience where your actual house becomes a flying ship. Look out your windows to see Cesium terrain streaming below.
+A VR experience where your actual house becomes a flying ship. Look out your windows to see Cesium terrain streaming below as you fly anywhere on Earth.
 
-## Phase 1: Single Room Cockpit
+**Status:** Phase 1 (Single Room Cockpit MVP) — In Development
 
-### Features
-- AR Passthrough (see your real room)
-- Steerable wheel (placeable and persistent)
-- Altitude/speed lever
-- Window portals showing Cesium terrain
-- Free-roam flight over real Earth
+[![Unity CI](https://github.com/brandongraves08/flyinghousevr/actions/workflows/ci.yml/badge.svg)](https://github.com/brandongraves08/flyinghousevr/actions)
 
-## Setup
+---
 
-### 1. Unity Setup
+## Features
+
+### Current (Phase 1)
+- ✅ AR Passthrough — See your real room while flying
+- ✅ Grabbable steering wheel (persistent calibration)
+- ✅ Altitude/speed lever control
+- ✅ Cesium terrain streaming over real Earth
+- ✅ Window portal masking
+
+### Planned
+- 🚧 Weather system (clear, cloudy, rain, storm)
+- 🚧 Flight scenarios (NYC flyover, Rocky Mountains storm, etc.)
+- 🚧 Virtual balcony (lean out windows)
+- 🚧 Multi-room house (Phase 2)
+
+---
+
+## Quick Start
+
+### Prerequisites
 - Unity 2022.3 LTS or newer
-- Android Build Support (Quest)
-- OpenXR Plugin
+- Android Build Support (for Quest)
+- Meta Quest 2/3/Pro or compatible VR headset
 
-### 2. Package Manager Dependencies
-Add to `Window > Package Manager > + > Add from Git URL`:
-- Cesium for Unity: `https://github.com/CesiumGS/cesium-unity.git?path=/Packages/com.cesium.unity`
-- XR Interaction Toolkit: Built-in, add via Package Manager UI
+### Setup
 
-### 3. Cesium Ion Token
-1. Go to https://cesium.com/ion/
-2. Sign up for free account
-3. Go to `Tokens` > `Create Token`
-4. Name it "FlyingHouseVR"
-5. Copy the token
-6. In Unity, open `Cesium` menu > `Cesium`
-7. Paste your token in the Project Settings
+1. **Clone the repo:**
+   ```bash
+   git clone https://github.com/brandongraves08/flyinghousevr.git
+   cd flyinghousevr
+   ```
 
-### 4. Build for Quest
-1. Switch to Android platform
-2. Set Texture Compression to ASTC
-3. Player Settings > XR Plug-in Management > OpenXR > Quest/Quest 2
-4. Build and run
+2. **Open in Unity Hub:**
+   - Open Unity Hub
+   - Click "Open"
+   - Select the `flyinghousevr` folder
+
+3. **Install Required Packages:**
+   - Open `Window > Package Manager`
+   - Click `+ > Add package from Git URL`
+   - Add: `https://github.com/CesiumGS/cesium-unity.git?path=/Packages/com.cesium.unity`
+   - Verify XR Interaction Toolkit is installed (should be via manifest)
+
+4. **Set Up Cesium:**
+   - Go to https://cesium.com/ion/
+   - Create free account → Tokens → "Create Token"
+   - Copy token
+   - In Unity: `Cesium > Cesium` → paste token
+
+5. **Build for Quest:**
+   - `File > Build Settings`
+   - Switch Platform to Android
+   - Texture Compression: ASTC
+   - `Build`
+
+---
 
 ## Controls
-- **Steering Wheel**: Grab and turn to bank left/right
-- **Lever**: Push forward to descend/slow, pull back to ascend/speed up
-- **Calibration**: Place wheel where comfortable, position remembered
 
-## Architecture
+| Action | Input |
+|--------|-------|
+| Steer | Grab wheel → Turn left/right |
+| Altitude | Push lever forward (down/slower) / Pull back (up/faster) |
+| Lean out window | Grab rail + pull trigger |
+| Pause | Menu button |
+| Grab objects | Grip button |
 
-### Scripts
-- `FlightController.cs` - Handles movement, steering input, altitude
-- `SteeringWheel.cs` - Grabbable wheel interaction
-- `AltitudeLever.cs` - Speed/height control lever
-- `CalibrationManager.cs` - Save/load wheel position
-- `WindowPortal.cs` - Stencil masking for window views
+---
 
-### Scene Hierarchy
+## Project Structure
+
 ```
-XR Origin (AR Passthrough)
-├── Camera
-├── SteeringWheelAnchor (persistent position)
-│   └── SteeringWheel (grabbable)
-├── LeverAnchor
-│   └── AltitudeLever
-└── HouseInterior
-    ├── Walls (passthrough stencil)
-    ├── Floor
-    └── WindowFrame
-
-Cesium3DTileset (World Terrain)
-CesiumGeoreference
-CesiumGlobeAnchor (attached to XR Origin)
+Assets/
+├── Scenes/
+│   └── FlyingHouse.unity          # Main scene
+├── Scripts/
+│   ├── FlightController.cs        # Flight physics & movement
+│   ├── SteeringWheel.cs           # Grabbable wheel logic
+│   ├── AltitudeLever.cs           # Speed/altitude control
+│   ├── CalibrationManager.cs      # Persistent positioning
+│   ├── WindowPortal.cs            # Stencil window masking
+│   ├── WeatherManager.cs          # Weather system
+│   ├── ScenarioManager.cs         # Flight missions
+│   └── BalconyManager.cs          # Lean out mechanic
+├── Shaders/
+│   ├── StencilMask.shader         # Window hole shader
+│   └── TerrainVisible.shader      # Terrain visibility shader
+├── Materials/
+│   ├── WindowGlass.mat
+│   ├── Wall.mat
+│   └── Floor.mat
+└── Editor/
+    └── SceneBuilder.cs            # Editor helper for scene setup
 ```
+
+---
+
+## Development
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+---
+
+## License
+
+MIT License — see [LICENSE](LICENSE)
+
+---
+
+## Credits
+
+- Cesium — 3D geospatial data streaming
+- XR Interaction Toolkit — VR interactions

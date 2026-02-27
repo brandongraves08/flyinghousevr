@@ -61,4 +61,62 @@ public class CalibrationManager : MonoBehaviour
             altitudeLever.rotation = currentData.leverRotation;
         }
     }
-    
+
+    public void SaveCalibration()
+    {
+        if (steeringWheel == null || altitudeLever == null)
+        {
+            Debug.LogWarning("Cannot save calibration: references missing.");
+            return;
+        }
+
+        currentData = new CalibrationData()
+        {
+            wheelPosition = steeringWheel.position,
+            wheelRotation = steeringWheel.rotation,
+            leverPosition = altitudeLever.position,
+            leverRotation = altitudeLever.rotation
+        };
+
+        try
+        {
+            string json = JsonUtility.ToJson(currentData, true);
+            File.WriteAllText(savePath, json);
+            Debug.Log("Calibration saved to " + savePath);
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Failed to save calibration: " + e.Message);
+        }
+    }
+
+    public void ResetCalibration()
+    {
+        if (File.Exists(savePath))
+        {
+            try
+            {
+                File.Delete(savePath);
+                Debug.Log("Calibration file deleted.");
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError("Failed to delete calibration: " + e.Message);
+            }
+        }
+
+        // Optionally reset transforms to origin/defaults
+        if (steeringWheel != null)
+        {
+            steeringWheel.localPosition = Vector3.zero;
+            steeringWheel.localRotation = Quaternion.identity;
+        }
+        if (altitudeLever != null)
+        {
+            altitudeLever.localPosition = Vector3.zero;
+            altitudeLever.localRotation = Quaternion.identity;
+        }
+
+        currentData = null;
+    }
+}

@@ -103,4 +103,8 @@ public class HomeRoomSystem : MonoBehaviour
     
     public RoomData GetCurrentRoom() => currentRoom;
     public List<RoomData> GetUnlockedRooms() => unlockedRooms;
+
+    public RoomData GetRoomById(string roomId) => allRooms.Find(r => r.roomId == roomId);
+
+    public bool IsRoomUnlocked(string roomId) => unlockedRooms.Exists(r => r.roomId == roomId);
 }

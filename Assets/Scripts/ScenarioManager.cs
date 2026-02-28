@@ -53,6 +53,27 @@ public class ScenarioManager : MonoBehaviour
         knownLocations["SYDNEY"] = new Vector3d(151.2093, -33.8688, 500);
         knownLocations["DUBAI"] = new Vector3d(55.2708, 25.2048, 500);
         knownLocations["RIO"] = new Vector3d(-43.1729, -22.9068, 500);
+        
+        // Subscribe to waypoint events
+        if (WaypointManager.Instance != null)
+        {
+            WaypointManager.Instance.OnWaypointReached.AddListener(OnWaypointReached);
+        }
+    }
+    
+    void OnWaypointReached(string waypointName)
+    {
+        if (hudText != null)
+        {
+            hudText.text = $"Waypoint Reached: {waypointName}";
+            StartCoroutine(ClearBriefingAfter(3f));
+        }
+        
+        // Check if all waypoints completed
+        if (currentScenario != null && currentScenario.completionCondition == "navigate")
+        {
+            ScenarioCompleted();
+        }
     }
 
     void InitializeScenarios()
@@ -126,6 +147,20 @@ public class ScenarioManager : MonoBehaviour
                 currentScenario.startLatitude,
                 currentScenario.startAltitude
             );
+        }
+
+        // Set up waypoints
+        if (WaypointManager.Instance != null)
+        {
+            WaypointManager.Instance.ClearWaypoints();
+            foreach (var wp in currentScenario.waypoints)
+            {
+                if (knownLocations.ContainsKey(wp.ToUpper()))
+                {
+                    var loc = knownLocations[wp.ToUpper()];
+                    WaypointManager.Instance.AddWaypoint(wp, loc.x, loc.y);
+                }
+            }
         }
 
         // Set weather

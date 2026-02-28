@@ -42,7 +42,7 @@ public class FlightController : MonoBehaviour
     {
         if (!isFlying) return;
         
-        float steering = steeringWheel != null ? steeringWheel.GetSteeringInput() : 0f;
+        float steering = steeringWheel != null ? steeringWheel.GetSteeringInput() : manualSteeringInput;
         float throttle = altitudeLever != null ? altitudeLever.GetThrottleInput() : 0f;
         
         // Update heading based on steering
@@ -104,5 +104,19 @@ public class FlightController : MonoBehaviour
         altitude = alt;
         heading = 0f;
         UpdateGlobePosition();
+    }
+
+    // Desktop input support
+    private float manualSteeringInput = 0f;
+    
+    public void SetManualSteering(float steering)
+    {
+        manualSteeringInput = steering;
+        
+        // Apply directly to heading if no steering wheel
+        if (steeringWheel == null)
+        {
+            heading += steering * turnSpeed * Time.deltaTime * 0.5f;
+        }
     }
 }

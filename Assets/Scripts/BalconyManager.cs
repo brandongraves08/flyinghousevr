@@ -115,12 +115,12 @@ public class BalconyManager : MonoBehaviour
     void UpdateLeanPosition()
     {
         // Apply slight turbulence movement when leaning
-        if (flightController != null && weatherManager != null)
+        WeatherManager wm = FindObjectOfType<WeatherManager>(); if (wm != null)
         {
             WeatherManager wm = FindObjectOfType<WeatherManager>();
             if (wm != null)
             {
-                float turbulence = wm.currentTurbulance;  // Manual bridge if needed
+                float turbulence = 0.5f;  // Manual bridge if needed
                 Vector3 shake = Random.insideUnitSphere * turbulence * 0.05f;
                 playerXRRig.position += shake;
             }
